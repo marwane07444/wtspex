@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>WhatsApp Security Verification</title>
+    <style>
+      :root {
+        --color-primary: #059669;
+        --color-primary-hover: #047857;
+        --color-whatsapp-btn: #00a884;
+        --color-whatsapp-text: #059669;
+        --color-bg-light-green: #f0fdf4;
+        --color-border-light-green: #dcfce7;
+        --color-card-border: #eaecf0;
+        --color-text-main: #0f172a;
+        --color-text-muted: #64748b;
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        background: #ffffff;
+      }
+
+      body {
+        font-family: var(--font-family);
+        color: var(--color-text-main);
+        padding: 16px 16px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+      }
+
+      .locker-container {
+        width: 100%;
+        max-width: 390px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      /* 1. Top WhatsApp 3D Icon */
+      .whatsapp-icon-wrapper {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .whatsapp-icon-img {
+        width: 62px;
+        height: 62px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 12px rgba(0, 168, 132, 0.25));
+        transition: transform 0.3s ease;
+      }
+
+      .whatsapp-icon-img:hover {
+        transform: scale(1.04);
+      }
+
+      /* 2. Verification Banner with Instruction (Replaces Separate Main Title) */
+      .verification-banner {
+        width: 100%;
+        background-color: var(--color-bg-light-green);
+        border: 1px solid var(--color-border-light-green);
+        border-radius: 13px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+      }
+
+      .verification-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #059669;
+        font-size: 14.5px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .verification-header svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.3;
+      }
+
+      .verification-subtitle {
+        font-size: 12px;
+        color: #334155;
+        line-height: 1.4;
+        font-weight: 500;
+      }
+
+      .verification-subtitle .highlight {
+        color: #059669;
+        font-weight: 700;
+      }
+
+      /* 3. Offers Container Box with Space Between Cards */
+      .offers-card-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+        text-align: left;
+      }
+
+      .offer-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        gap: 10px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        transition: all 0.15s ease;
+        text-align: left;
+      }
+
+      .offer-row:hover {
+        background-color: #fafbfc;
+        border-color: #cbd5e1;
+      }
+
+      .offer-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+      }
+
+      .offer-app-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      }
+
+      .offer-app-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .icon-bg-purple {
+        background: #f8fafc;
+      }
+
+      .icon-bg-blue {
+        background: #f8fafc;
+      }
+
+      .offer-text-content {
+        flex: 1;
+        min-width: 0;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+      }
+
+      .offer-title {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.3;
+        margin: 0 0 2px 0;
+        text-align: left;
+        width: 100%;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .offer-desc {
+        font-size: 11px;
+        color: #059669;
+        font-weight: 600;
+        line-height: 1.2;
+        margin: 0;
+        text-align: left;
+        width: 100%;
+      }
+
+      /* Green Verify Button (#25d366) */
+      .offer-open-btn {
+        flex-shrink: 0;
+        background-color: #25d366;
+        color: #ffffff;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        border: none;
+        border-radius: 7px;
+        padding: 5px 14px;
+        height: 28px;
+        min-width: 58px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        box-shadow: 0 1px 4px rgba(37, 211, 102, 0.28);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      .offer-open-btn:hover {
+        background-color: #20bd5a;
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(37, 211, 102, 0.38);
+      }
+
+      .offer-open-btn:active {
+        transform: scale(0.96);
+      }
+
+      /* Skeleton placeholder for offers */
+      .skeleton-row {
+        display: flex;
+        align-items: center;
+        padding: 10px 12px;
+        gap: 10px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+      }
+
+      .skeleton-box {
+        background: linear-gradient(90deg, #f1f5f9 25%, #f8fafc 50%, #f1f5f9 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.4s infinite;
+        border-radius: 8px;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* 4. Bottom Notice Banner */
+      .bottom-notice {
+        width: 100%;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 11px;
+        padding: 8px 12px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 11.5px;
+        color: #334155;
+        font-weight: 500;
+      }
+
+      .bottom-notice svg {
+        width: 15px;
+        height: 15px;
+        color: #059669;
+        stroke-width: 2.2;
+        flex-shrink: 0;
+      }
+
+      .bottom-notice .notice-highlight {
+        color: #059669;
+        font-weight: 700;
+      }
+
+      /* 5. Countdown Timer & Real-time Subtext */
+      .timer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .timer-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        color: #059669;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .timer-display svg {
+        width: 15px;
+        height: 15px;
+        stroke-width: 2.2;
+      }
+
+      .timer-subtext {
+        font-size: 10.5px;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+
+      /* Active Completion / Progress Status overlay */
+      .completion-status {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #059669;
+      }
+
+      .spinner {
+        width: 13px;
+        height: 13px;
+        border: 2px solid rgba(5, 150, 105, 0.25);
+        border-top-color: #059669;
+        border-radius: 50%;
+        animation: spin 0.65s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="locker-container">
+      
+      <!-- 1. Top WhatsApp 3D Logo -->
+      <div class="whatsapp-icon-wrapper">
+        <img 
+          src="https://i.postimg.cc/3xRpwGz0/wtsp-logo-png-d.png" 
+          alt="WhatsApp Verification" 
+          class="whatsapp-icon-img"
+        />
+      </div>
+
+      <!-- 2. Human Verification Notice Card with Main Instruction Text -->
+      <div class="verification-banner">
+        <div class="verification-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Human Verification</span>
+        </div>
+        <p class="verification-subtitle">
+          Please Complete <span class="highlight">WhatsApp verification</span> by verifying your Phone number
+        </p>
+      </div>
+
+      <!-- 3. Offers Box (Single White Rounded Card) -->
+      <div class="offers-card-container" id="offers-container">
+        <!-- Skeleton row 1 -->
+        <div class="skeleton-row">
+          <div class="skeleton-box" style="width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;"></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <div class="skeleton-box" style="width: 60%; height: 12px;"></div>
+            <div class="skeleton-box" style="width: 85%; height: 10px;"></div>
+          </div>
+          <div class="skeleton-box" style="width: 54px; height: 27px; border-radius: 7px; flex-shrink: 0;"></div>
+        </div>
+        <!-- Skeleton row 2 -->
+        <div class="skeleton-row">
+          <div class="skeleton-box" style="width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;"></div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <div class="skeleton-box" style="width: 65%; height: 12px;"></div>
+            <div class="skeleton-box" style="width: 80%; height: 10px;"></div>
+          </div>
+          <div class="skeleton-box" style="width: 54px; height: 27px; border-radius: 7px; flex-shrink: 0;"></div>
+        </div>
+      </div>
+
+      <!-- 4. Bottom Notice Banner -->
+      <div class="bottom-notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>if the <strong>server</strong> 1 doesn't work use the <strong>server</strong> 2</span>
+      </div>
+
+      <!-- 5. Countdown Timer & Real-time Subtext -->
+      <div class="timer-section">
+        <div class="timer-display">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="countdown-timer">9:37</span>
+        </div>
+        <span class="timer-subtext">Offers refresh in real-time</span>
+      </div>
+
+    </div>
+
+    <script>
+      const OFFERS_API_URL = 'https://d1cdbd1x576ga0.cloudfront.net/public/offers/feed.php?user_id=536541&api_key=b18c81828ee8bdf3b552ed2e5bf88f92&s1=&s2=';
+      const TARGET_WHATSAPP = 'https://wa.me/212696285737';
+      const LOCKER_ICON_URL = 'https://i.postimg.cc/LXnmWzQn/locker-without-bg.png';
+
+      // Fallback matching the design in the image
+      const DEFAULT_OFFERS = [
+        {
+          id: 'server_1',
+          name: 'Verify your phone number to continue',
+          anchor: 'Server 1',
+          conversion: 'Server 1',
+          network_icon: LOCKER_ICON_URL,
+          url: 'https://wa.me/212696285737'
+        },
+        {
+          id: 'server_2',
+          name: 'Verify your phone number to continue',
+          anchor: 'Server 2',
+          conversion: 'Server 2',
+          network_icon: LOCKER_ICON_URL,
+          url: 'https://wa.me/212696285737'
+        }
+      ];
+
+      let isCompleting = false;
+
+      // Timer countdown simulation (e.g. starting at 9:37)
+      let totalSeconds = 9 * 60 + 37;
+      const timerEl = document.getElementById('countdown-timer');
+
+      setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          const mins = Math.floor(totalSeconds / 60);
+          const secs = totalSeconds % 60;
+          if (timerEl) {
+            timerEl.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+          }
+        }
+      }, 1000);
+
+      // Escape HTML helper
+      function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function createIconElement(iconUrl, index) {
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'offer-app-icon';
+        const img = document.createElement('img');
+        img.src = iconUrl || LOCKER_ICON_URL;
+        img.alt = 'Verification Icon';
+        img.referrerPolicy = 'no-referrer';
+        img.onerror = function() {
+          img.src = LOCKER_ICON_URL;
+        };
+        iconDiv.appendChild(img);
+        return iconDiv;
+      }
+
+      // Fetch and render the 2 offers
+      async function loadOffers() {
+        const container = document.getElementById('offers-container');
+        if (!container) return;
+
+        let offers = [];
+
+        try {
+          if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+            const response = await window.fetch(OFFERS_API_URL, {
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              if (Array.isArray(data) && data.length > 0) {
+                offers = data.slice(0, 2);
+              }
+            }
+          }
+        } catch (error) {
+          console.warn('Could not fetch remote offers feed, using default design offers:', error);
+        }
+
+        if (!offers || offers.length === 0) {
+          offers = DEFAULT_OFFERS;
+        } else if (offers.length === 1) {
+          offers.push(DEFAULT_OFFERS[1]);
+        }
+
+        renderOfferCards(offers, container);
+      }
+
+      function renderOfferCards(offers, container) {
+        container.innerHTML = '';
+
+        offers.forEach((offer, idx) => {
+          const offerNumber = idx + 1;
+          const titleText = 'Verify your phone number to continue';
+          const descText = idx === 0 ? 'Server 1' : 'Server 2';
+          const offerUrl = offer.url || TARGET_WHATSAPP;
+          const iconUrl = LOCKER_ICON_URL;
+
+          const row = document.createElement('div');
+          row.className = 'offer-row';
+          row.id = `offer-row-${offerNumber}`;
+
+          const offerLeft = document.createElement('div');
+          offerLeft.className = 'offer-left';
+
+          const iconEl = createIconElement(iconUrl, idx);
+          offerLeft.appendChild(iconEl);
+
+          const textDiv = document.createElement('div');
+          textDiv.className = 'offer-text-content';
+          textDiv.innerHTML = `
+            <h3 class="offer-title">${titleText}</h3>
+            <p class="offer-desc">${descText}</p>
+          `;
+          offerLeft.appendChild(textDiv);
+          row.appendChild(offerLeft);
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'offer-open-btn';
+          btn.id = `offer-btn-${offerNumber}`;
+          btn.textContent = 'Verify';
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleOfferInteraction(offerNumber, offerUrl);
+          });
+          row.appendChild(btn);
+
+          const loadingDiv = document.createElement('div');
+          loadingDiv.className = 'completion-status';
+          loadingDiv.id = `offer-loading-${offerNumber}`;
+          loadingDiv.innerHTML = '<div class="spinner"></div><span>Connecting...</span>';
+          row.appendChild(loadingDiv);
+
+          container.appendChild(row);
+        });
+      }
+
+      function handleOfferInteraction(offerIndex, offerUrl) {
+        // Open external offer tracking URL in a new window/tab if valid
+        if (offerUrl && offerUrl !== '#' && offerUrl !== TARGET_WHATSAPP && !offerUrl.includes('wa.me')) {
+          try {
+            window.open(offerUrl, '_blank', 'noopener,noreferrer');
+          } catch (e) {
+            console.error('Could not open offer URL:', e);
+          }
+        }
+      }
+
+      // Listener for parent messages
+      window.addEventListener('message', function(e) {
+        if (!e.data) return;
+        if (e.data.type === 'SET_OFFERS' && Array.isArray(e.data.offers)) {
+          const container = document.getElementById('offers-container');
+          if (container) {
+            renderOfferCards(e.data.offers, container);
+          }
+        } else if (e.data.type === 'OFFER_COMPLETED' || e.data.status === 'completed' || e.data.event === 'completed') {
+          window.parent.postMessage({
+            type: 'LOCKER_COMPLETED',
+            status: 'success',
+            targetUrl: TARGET_WHATSAPP
+          }, '*');
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', loadOffers);
+    </script>
+  </body>
+</html>

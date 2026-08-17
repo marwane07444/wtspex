@@ -1,0 +1,7 @@
+{
+  "name": "Chat on WhatsApp",
+  "description": "A modern, premium, mobile-first landing page to start a direct WhatsApp conversation with +212 696-285737.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

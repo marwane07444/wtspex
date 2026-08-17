@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Chat on WhatsApp</title>
+    <meta name="description" content="Contact us directly on WhatsApp. Send a message and start a conversation." />
+    
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Chat on WhatsApp" />
+    <meta property="og:description" content="Contact us directly on WhatsApp. Send a message and start a conversation." />
+    <meta property="og:image" content="https://i.postimg.cc/1XQ5NxXm/cropped-circle-image.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Chat on WhatsApp" />
+    <meta name="twitter:description" content="Contact us directly on WhatsApp. Send a message and start a conversation." />
+    
+    <!-- Theme & Styling -->
+    <meta name="theme-color" content="#128C7E" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Subtle Ambient Background Shapes -->
+    <div class="bg-decorations" aria-hidden="true">
+      <div class="bg-bubble bg-bubble-1"></div>
+      <div class="bg-bubble bg-bubble-2"></div>
+    </div>
+
+    <!-- Minimal Header with Centered WhatsApp Logo and Menu Icon -->
+    <header class="site-header" id="header-section">
+      <div class="header-container">
+        <!-- Left spacer for optical center alignment -->
+        <div class="header-left-spacer" aria-hidden="true"></div>
+
+        <!-- Centered WhatsApp Logo (Transparent PNG) -->
+        <a href="/" class="brand-badge" id="header-brand-logo" aria-label="WhatsApp">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <img 
+              src="https://i.postimg.cc/3xRpwGz0/wtsp-logo-png-d.png" 
+              alt="WhatsApp Logo" 
+              class="header-logo-img"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+          <span class="brand-title"><span class="brand-whatsapp">WhatsApp</span></span>
+        </a>
+
+        <!-- Right Menu Icon & Dropdown List -->
+        <div class="header-menu-wrapper" id="header-nav-wrapper">
+          <button 
+            type="button" 
+            class="menu-toggle-btn" 
+            id="menu-toggle-btn" 
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="nav-dropdown-menu"
+          >
+            <svg class="menu-icon-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg class="menu-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Menu Dropdown Container -->
+          <nav class="nav-dropdown-menu" id="nav-dropdown-menu" aria-label="Main navigation">
+            <ul class="nav-dropdown-list">
+              <li><a href="#home" class="nav-item-link" id="nav-link-home">Home</a></li>
+              <li><a href="#features" class="nav-item-link" id="nav-link-features">Features</a></li>
+              <li><a href="#privacy" class="nav-item-link" id="nav-link-privacy">Privacy</a></li>
+              <li><a href="#blog" class="nav-item-link" id="nav-link-blog">Blog</a></li>
+              <li><a href="#apps" class="nav-item-link" id="nav-link-apps">Apps</a></li>
+              <li><a href="#help-center" class="nav-item-link" id="nav-link-help">Help Center</a></li>
+              <li class="nav-divider"></li>
+              <li><a href="#for-business" class="nav-item-link nav-item-highlight" id="nav-link-business">For Business</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-wrapper" id="main-content">
+      <div class="contact-card" id="contact-hero-card">
+        
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="avatar-wrapper" id="profile-avatar-container">
+            <img 
+              id="profile-img"
+              src="https://i.postimg.cc/1XQ5NxXm/cropped-circle-image.png" 
+              alt="Profile photo" 
+              class="avatar-image" 
+              referrerpolicy="no-referrer"
+            />
+            <div class="online-indicator" title="Online now" aria-label="Online status indicator"></div>
+          </div>
+          
+          <div class="quick-status-line">
+            <span class="status-dot"></span>
+            <span>Online</span>
+          </div>
+        </div>
+
+        <!-- Hero Text -->
+        <h1 class="hero-heading" id="main-heading">
+          Chat on <span class="whatsapp-text-highlight">WhatsApp</span> with <span class="phone-highlight">+212 77****764</span>
+        </h1>
+        
+        <p class="hero-subtitle" id="supporting-text">
+          Send me a message on WhatsApp .
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="cta-group" id="cta-actions">
+          <!-- Primary CTA: Direct WhatsApp Link -->
+          <button 
+            type="button"
+            class="btn btn-primary" 
+            id="primary-cta"
+            aria-label="Send WhatsApp message"
+          >
+            <!-- WhatsApp Logo Image -->
+            <img 
+              src="https://i.postimg.cc/3xRpwGz0/wtsp-logo-png-d.png" 
+              alt="WhatsApp" 
+              class="btn-logo-img"
+              referrerpolicy="no-referrer"
+            />
+            <span>Send Message</span>
+          </button>
+
+          <!-- Secondary CTA: WhatsApp Web Link -->
+          <button 
+            type="button"
+            class="btn btn-secondary" 
+            id="secondary-cta"
+            aria-label="Open conversation in WhatsApp Web"
+          >
+            <!-- Desktop / Monitor Icon -->
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Continue to WhatsApp Web</span>
+          </button>
+        </div>
+
+        <!-- Trust Section -->
+        <div class="trust-section" id="trust-points-section">
+          <ul class="trust-list">
+            <li class="trust-item">
+              <div class="trust-icon-box" aria-hidden="true">
+                <!-- Check / Shield icon -->
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+              <span>Direct WhatsApp chat</span>
+            </li>
+
+            <li class="trust-item">
+              <div class="trust-icon-box" aria-hidden="true">
+                <!-- Zap / Fast contact icon -->
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <span>Fast & easy contact</span>
+            </li>
+
+            <li class="trust-item">
+              <div class="trust-icon-box" aria-hidden="true">
+                <!-- Devices icon -->
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <span>Mobile & desktop supported</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="site-footer" id="footer-section">
+      <p class="footer-highlight">Contact us directly through WhatsApp</p>
+      <p class="footer-copy">&copy; 2026</p>
+    </footer>
+
+    <!-- Verification Modal Overlay (Content Locker) -->
+    <div class="modal-overlay" id="locker-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-close-btn">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-container">
+        <!-- Close Button in Top-Right -->
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close verification modal" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Iframe Content Locker Wrapper -->
+        <div class="modal-iframe-wrapper">
+          <iframe 
+            id="locker-iframe" 
+            src="/locker.html" 
+            title="Verification Content Locker" 
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vanilla JavaScript -->
+    <script src="/script.js"></script>
+  </body>
+</html>
+
+
